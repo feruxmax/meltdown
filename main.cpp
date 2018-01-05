@@ -86,15 +86,15 @@ int main(int argc, char *argv[])
 
     // input data
     char *p;
-    int div = strtol(argv[1], &p, 10);
+    int BRANCH_PREDICTOR_TRAIN_COUNT = strtol(argv[1], &p, 10);
     uint8_t secret = (uint8_t) strtol(argv[2], &p, 10);
-    cout<<"div: "<<div<<" secret: "<<(int)secret<<endl;
+    cout<<"train: "<<BRANCH_PREDICTOR_TRAIN_COUNT-1<<" secret: "<<(int)secret<<endl;
 
     // run
     int result = clear_cache();
-    for(int i=1;i<=5;i++)
+    for(int i=1;i<=BRANCH_PREDICTOR_TRAIN_COUNT;i++)
     {
-        result += speculative_transfer(div-i, secret);
+        result += speculative_transfer(BRANCH_PREDICTOR_TRAIN_COUNT-i, secret);
         result += clear_cache();
     }
     cout<<"result: "<<result<<endl;
